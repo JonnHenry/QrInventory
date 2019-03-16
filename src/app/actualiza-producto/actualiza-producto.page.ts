@@ -79,7 +79,6 @@ export class ActualizaProductoPage implements OnInit {
   }
 
   ngOnDestroy() {
-
     this.navigationSubscription.unsubscribe();
   }
 

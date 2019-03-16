@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from '../api/productos.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-producto',

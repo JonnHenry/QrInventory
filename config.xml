@@ -94,5 +94,4 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-network-information" spec="~2.0.1" />
-    <engine name="android" spec="6.4.0" />
 </widget>
