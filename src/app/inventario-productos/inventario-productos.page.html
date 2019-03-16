@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-button color="medium" fill="outline" slot="start" size="large" (click)="return()">
+      <ion-icon name="arrow-round-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title slot="start">Inventario {{id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Actualizando..." pullingIcon="arrow-dropdown">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf='cantProd === 0'>
+    <ion-list>
+      <ion-item>
+        <ion-label>No se encontraron productos</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf='!prodCargados; else elseBlock'>
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+  <ng-template #elseBlock>
+    <ion-card *ngFor="let item of productoInventarios">
+      <ion-card-header>
+        <ion-card-title>Nombre: {{item.producto.nombre}}</ion-card-title>
+        <ion-card-subtitle><b>Codigo:</b> {{item.producto.codigoProducto}}</ion-card-subtitle>
+        <ion-label><b>Creado:</b> {{item.datosInventario.createdAt | date}}; <b>Actualizado:</b> {{item.datosInventario.updatedAt | date}}</ion-label>
+        <ion-label>;<b>Número de productos :</b> {{item.datosInventario.cantidad}}</ion-label>
+      </ion-card-header>
+      <ion-card-content><b>Observación:</b> {{item.producto.observacion}}</ion-card-content>
+      <ion-item>
+        <ion-button fill="outline" slot="end" (click)='delete(item)'>
+          <ion-icon name="trash" color="danger"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </ng-template>
+
+</ion-content>

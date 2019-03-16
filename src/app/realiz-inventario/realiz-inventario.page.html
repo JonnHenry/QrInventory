@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button shape="round" fill="outline" slot="start" size="large" (click)="return()">
+      <ion-icon name="arrow-round-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title slot="start">Realizar Inventario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="!confirmacion">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+  <form #formCrearProducInvent="ngForm" (ngSubmit)="agregarProductInventario(formCrearProducInvent)">
+    <div *ngIf='invtProd.codProducto === 0; else elseBlock'>
+      <ion-button shape="round" class="ion-align-self-center" expand="block" fill="outline" (click)="leerCodigo()">Escanear
+        el codigo</ion-button>
+    </div>
+    <ng-template #elseBlock>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Codigo: {{ invtProd.codProducto }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-icon color="primary" name="create" slot="start"></ion-icon>
+          <ion-label position="floating"><b>Cantidad</b></ion-label>
+          <ion-input [(ngModel)]="invtProd.cantidad" minlength=1 name="cantidad" pattern="[0-9]+" required #cantidad="ngModel"></ion-input>
+        </ion-item>
+      </ion-card>
+
+      <ion-button type="submit" class="ion-text-uppercase" color="success" expand="full" [disabled]="!formCrearProducInvent.form.valid">Agregar
+        Producto
+      </ion-button>
+    </ng-template>
+
+
+  </form>
+
+</ion-content>

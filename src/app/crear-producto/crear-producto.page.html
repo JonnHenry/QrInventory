@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button shape="round" fill="outline" slot="start" size="large" (click)="return()">
+      <ion-icon name="arrow-round-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title slot="start">Crear producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="!confirmacion">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+  <form #formCrearProducto="ngForm" (ngSubmit)="agregarProduct(formCrearProducto)">
+    <div *ngIf='producto.codigoProducto === -1; else elseBlock'>
+      <ion-button shape="round" class="ion-align-self-center" expand="block" fill="outline" (click)="leerCodigo()">Escanear
+        el codigo del producto</ion-button>
+    </div>
+    <ng-template #elseBlock>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Codigo: {{ producto.codigoProducto }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card>
+        <ion-item>
+          <ion-icon color="primary" name="create" slot="start"></ion-icon>
+          <ion-label position="floating"><b>Nombre</b></ion-label>
+          <ion-input [(ngModel)]="producto.nombre" name="nombre" required #nombre="ngModel"></ion-input>
+        </ion-item>
+      </ion-card>
+
+
+      <ion-card>
+        <ion-item>
+          <ion-icon color="primary" name="create" slot="start"></ion-icon>
+          <ion-label position="floating"><b>Observación</b></ion-label>
+          <ion-textarea #observacion="ngModel" name="observacion" [(ngModel)]="producto.observacion" rows="4"
+            placeholder="Ingrese la observacion del producto aqui......"></ion-textarea>
+        </ion-item>
+
+      </ion-card>
+
+      <ion-button type="submit" class="ion-text-uppercase" color="success" expand="full" [disabled]="!formCrearProducto.form.valid">Agregar
+        Producto
+      </ion-button>
+    </ng-template>
+
+
+  </form>
+
+</ion-content>

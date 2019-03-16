@@ -1,0 +1,8 @@
+{
+  "name": "QrInventory",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "caf3c745"
+}

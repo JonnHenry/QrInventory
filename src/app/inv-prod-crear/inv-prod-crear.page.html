@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"> Inventarios </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Actualizando... " pullingIcon="arrow-dropdown">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf='cantProd === 0'>
+    <ion-list>
+      <ion-item>
+        <ion-label>No se encontraron inventarios</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf='!prodCargados; else elseBlock'>
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+  <ng-template #elseBlock>
+    <ion-card *ngFor="let item of inventarios">
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+        <ion-card-subtitle><b>Codigo:</b> {{item.codigoInventario}}</ion-card-subtitle>
+        <ion-label><b>Creado:</b> {{item.createdAt | date}}; <b>Actualizado:</b> {{item.updatedAt | date}}</ion-label>
+      </ion-card-header>
+      <ion-card-content><b>Observación:</b> {{item.observacion}}</ion-card-content>
+      <ion-item >
+        <ion-button class="center" expand="block" shape="round" expand="full" (click)='crearInvetaProduct(item)'> Realizar Inventario
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </ng-template>
+
+</ion-content>

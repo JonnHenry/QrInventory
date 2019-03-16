@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-button shape="round" fill="outline" slot="start" size="large" (click)="return()">
+          <ion-icon name="arrow-round-back" color="light"></ion-icon>
+        </ion-button>
+        <ion-title slot="start">Crear Inventario</ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div *ngIf="!confirmacion"><ion-progress-bar type="indeterminate"></ion-progress-bar></div>
+    <form #formCrearInventario="ngForm" (ngSubmit)="agregarInventario(formCrearInventario)">
+      
+        <ion-card>
+          <ion-item>
+            <ion-icon color="primary" name="create" slot="start"></ion-icon>
+            <ion-label position="floating"><b>Nombre</b></ion-label>
+            <ion-input [(ngModel)]="inventario.nombre" name="nombre" required #nombre="ngModel"></ion-input>
+          </ion-item>
+        </ion-card>
+  
+  
+        <ion-card>
+          <ion-item>
+            <ion-icon color="primary" name="create" slot="start"></ion-icon>
+            <ion-label position="floating"><b>Observación</b></ion-label>
+            <ion-textarea #observacion="ngModel" name="observacion" [(ngModel)]="inventario.observacion" rows="4"
+              placeholder="Ingrese la observacion del producto aqui......"></ion-textarea>
+          </ion-item>
+  
+        </ion-card>
+  
+        <ion-button type="submit" class="ion-text-uppercase" color="success" expand="full" [disabled]="!formCrearInventario.form.valid">Agregar Inventario
+        </ion-button>
+  
+  
+  
+      
+  
+  
+    </form>
+  
+
+</ion-content>
