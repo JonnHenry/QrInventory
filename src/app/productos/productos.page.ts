@@ -95,6 +95,7 @@ export class ProductosPage implements OnInit {
   }
 
   ngOnDestroy() {
+    this.productos = [];
     this.navigationSubscription.unsubscribe();
   }
   

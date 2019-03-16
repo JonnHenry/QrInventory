@@ -10,7 +10,6 @@ import { Network } from '@ionic-native/network/ngx';
 })
 export class HomePage implements OnInit{
 
-  
   private subscription: any;
   disconnectSubscription: any;
  
@@ -35,12 +34,7 @@ export class HomePage implements OnInit{
   ionViewDidEnter(){
     this.subscription = this.platform.backButton.subscribe(()=>{
         navigator['app'].exitApp();
-    });
-}
-
-ionViewWillLeave(){
-    this.subscription.unsubscribe();
-    this.disconnectSubscription.unsubscribe();
+  });
 }
 
 }

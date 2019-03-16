@@ -82,6 +82,7 @@ export class InventariosPage implements OnInit {
   }
 
   ngOnDestroy() {
+    this.inventarios = [];
     this.navigationSubscription.unsubscribe();
   }
 
