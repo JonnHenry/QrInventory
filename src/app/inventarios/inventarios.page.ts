@@ -75,7 +75,7 @@ export class InventariosPage implements OnInit {
         } else {
           this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
         }
-    }, error  => {
+    }, (error)  => {
       this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
       this.prodCargados = true;
     });

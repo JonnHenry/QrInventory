@@ -73,7 +73,7 @@ export class ProductosPage implements OnInit {
           this.prodCargados = true;
           this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
         }
-    }, error  => {
+    }, (error)  => {
       this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
       this.prodCargados = true;
     });
