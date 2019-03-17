@@ -71,5 +71,10 @@ export class InvProdCrearPage implements OnInit {
     this.router.navigate(['realizarInventario', item.codigoInventario]);
   }
 
+  ngOnDestroy() {
+    this.inventarios = [];
+    this.navigationSubscription.unsubscribe();
+  }
+
 
 }
