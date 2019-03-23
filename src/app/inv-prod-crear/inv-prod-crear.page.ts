@@ -50,6 +50,7 @@ export class InvProdCrearPage implements OnInit {
         if (result.errorBuscar ) {
           this.presentToast('Error, vuelva a abrir la pestaña');
           this.prodCargados = true;
+          this.cantProd = 0;
         } else if (result.cantidadProductos === 0) {
           this.prodCargados = true;
           this.cantProd = 0;
@@ -60,9 +61,10 @@ export class InvProdCrearPage implements OnInit {
           this.inventarios = result.data;
         }
     }, error  => {
-      this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
-      this.cantProd = 0;
+      this.cantProd = -1;
       this.prodCargados = true;
+      this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
+      
     });
   }
 
