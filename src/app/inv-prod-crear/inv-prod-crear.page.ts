@@ -1,7 +1,8 @@
 import { ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd  } from '@angular/router';
 import { InventariosService } from '../api/inventarios.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-inv-prod-crear',
@@ -11,13 +12,11 @@ import { InventariosService } from '../api/inventarios.service';
 export class InvProdCrearPage implements OnInit {
 
   public inventarios = [];
-  private invtService: InventariosService;
   public prodCargados = false;
   public cantProd = -1;
   private navigationSubscription: any;
 
-  constructor(private router: Router, public toastController: ToastController, private invetarioService: InventariosService) { 
-    this.invtService = invetarioService;
+  constructor(private statusBar: StatusBar,private router: Router, public toastController: ToastController, private invtService: InventariosService) { 
     this.navigationSubscription = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
          this.getInventarios(false);
@@ -26,6 +25,7 @@ export class InvProdCrearPage implements OnInit {
   }
 
   ngOnInit() {
+    // this.getInventarios(false);
   }
 
   async presentToast(mensage) {
@@ -44,7 +44,6 @@ export class InvProdCrearPage implements OnInit {
   }
 
   getInventarios(toastInvisible) { //Falso si se quiere que se vea el refresh
-    this.inventarios = [];
     this.prodCargados = toastInvisible;
     this.invtService.getInventarios().subscribe(
       result => {
@@ -72,9 +71,7 @@ export class InvProdCrearPage implements OnInit {
   }
 
   ngOnDestroy() {
-    this.inventarios = [];
     this.navigationSubscription.unsubscribe();
   }
-
 
 }

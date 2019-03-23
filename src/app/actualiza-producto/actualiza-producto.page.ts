@@ -1,8 +1,9 @@
-import { ActivatedRoute, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Router, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductosService } from '../api/productos.service';
 import { ToastController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 
 @Component({
@@ -16,22 +17,13 @@ export class ActualizaProductoPage implements OnInit {
   public producto: any;
   public prodCargados = false;
 
-  navigationSubscription: any;
-
   // tslint:disable-next-line:max-line-length
-  constructor( private route: ActivatedRoute, private router: Router, private servProductos: ProductosService, private toastController: ToastController) { 
+  constructor( private route: ActivatedRoute, private statusBar: StatusBar, private router: Router, private servProductos: ProductosService, private toastController: ToastController) { 
     this.id = this.route.snapshot.paramMap.get('id');
-
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        this.getProducto();
-      }
-    });
   }
 
   ngOnInit() {
-    // this.getProducto();
+    this.getProducto();
   }
 
   getProducto() {
@@ -70,16 +62,12 @@ export class ActualizaProductoPage implements OnInit {
         this.presentToast('El producto se ha actualizado de manera correcta');
         this.presentToast(result.respuesta);
         formUpdateProducto.reset();
-        this.router.navigateByUrl('/productos');
+        this.router.navigate(['productos']);
       },
       err => {
         this.presentToast('Ha ocurrido un error inesperado, vuelva a intentarlo.');
       }
     );
-  }
-
-  ngOnDestroy() {
-    this.navigationSubscription.unsubscribe();
   }
 
 }

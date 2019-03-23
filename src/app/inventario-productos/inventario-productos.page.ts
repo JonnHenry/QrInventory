@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { InvetProdService } from '../api/invet-prod.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 
 @Component({
   selector: 'app-inventario-productos',
@@ -13,21 +15,14 @@ export class InventarioProductosPage implements OnInit {
   public productoInventarios = [];
   public cantProd = -1;
   public prodCargados = false;
-  private navigationSubscription: any;
-  private invtService: InvetProdService;
 
-  constructor(private route: ActivatedRoute, private invetProdService: InvetProdService, public toastController: ToastController, private router: Router) {
+  constructor(private statusBar: StatusBar, private route: ActivatedRoute, private invtService: InvetProdService, public toastController: ToastController, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.invtService = invetProdService;
-    this.navigationSubscription = this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-         this.getProdInventario(false, this.id);
-      }
-    });
+    
    }
 
   ngOnInit() {
-    
+    this.getProdInventario(false, this.id);
   }
 
   return() {

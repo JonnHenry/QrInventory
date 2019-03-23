@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../api/productos.service';
 import { ToastController } from '@ionic/angular';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 
 @Component({
@@ -14,13 +15,9 @@ export class ProductosPage implements OnInit {
   public productos = [];
   public prodCargados = false;
   public cantProd = -1;
-  private serviciosProductos: any;
+  private navigationSubscription: any;
 
-
-  navigationSubscription: any;
-
-  constructor( private servProductos: ProductosService, public toastController: ToastController, private router: Router) {
-    this.serviciosProductos = servProductos;
+  constructor(private statusBar: StatusBar,private serviciosProductos: ProductosService, public toastController: ToastController, private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -30,6 +27,7 @@ export class ProductosPage implements OnInit {
   }
 
   ngOnInit() {
+    // this.getProductos(false);
   }
 
   async presentToast(mensage) {

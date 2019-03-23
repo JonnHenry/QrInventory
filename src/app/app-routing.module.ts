@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -11,12 +11,13 @@ const routes: Routes = [
   { path: 'crear-inventario', loadChildren: './crear-inventario/crear-inventario.module#CrearInventarioPageModule' },
   { path: 'actualiza-producto/:id', loadChildren: './actualiza-producto/actualiza-producto.module#ActualizaProductoPageModule' },
   { path: 'inventario-productos/:id', loadChildren: './inventario-productos/inventario-productos.module#InventarioProductosPageModule' },
-  { path: 'inv-prod-crear', loadChildren: './inv-prod-crear/inv-prod-crear.module#InvProdCrearPageModule' },
-  { path: 'salir', loadChildren: './salir/salir.module#SalirPageModule' }
+  { path: 'inv-prod-crear', loadChildren: './inv-prod-crear/inv-prod-crear.module#InvProdCrearPageModule' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

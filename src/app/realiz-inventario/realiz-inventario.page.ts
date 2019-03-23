@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InvetProdService } from '../api/invet-prod.service';
 import { ToastController } from '@ionic/angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-realiz-inventario',
@@ -17,7 +18,7 @@ export class RealizInventarioPage implements OnInit {
   private id: any;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private barcodeScanner: BarcodeScanner,private route: ActivatedRoute, private invetProdService: InvetProdService, public toastController: ToastController, private router: Router) {
+  constructor(private statusBar: StatusBar,private barcodeScanner: BarcodeScanner,private route: ActivatedRoute, private invetProdService: InvetProdService, public toastController: ToastController, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.invtProdService = invetProdService;
     this.confirmacion = true;

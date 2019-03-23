@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InventariosService } from '../api/inventarios.service';
 import { ToastController } from '@ionic/angular';
-import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Router} from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-crear-inventario',
@@ -12,10 +13,9 @@ export class CrearInventarioPage implements OnInit {
 
   public inventario: any;
   public confirmacion = true;
-  public invtService: InventariosService;
 
-  constructor(private invetarioService: InventariosService, public toastController: ToastController, private router: Router) {
-    this.invtService = invetarioService;
+  constructor(private statusBar: StatusBar,private invtService: InventariosService, public toastController: ToastController, private router: Router) {
+    
     this.inventario = {
       nombre: '',
       observacion: ''

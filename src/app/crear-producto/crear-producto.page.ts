@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from '../api/productos.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-crear-producto',
@@ -13,11 +14,10 @@ export class CrearProductoPage implements OnInit {
 
   public producto: any;
   public confirmacion = true;
-  private serviciosProductos: ProductosService;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private servProductos: ProductosService, private toastController: ToastController, private barcodeScanner: BarcodeScanner) {
-    this.serviciosProductos = servProductos;
+  constructor(private statusBar: StatusBar,private router: Router, private serviciosProductos: ProductosService, private toastController: ToastController, private barcodeScanner: BarcodeScanner) {
+    
     this.producto = {
       codigoProducto: -1,
       nombre: '',
